@@ -1,0 +1,66 @@
+  {% extends 'main.html' %}
+
+{% block content %}
+  <!--banner-->
+  <div>
+    <div class="container">
+      <h1>Login</h1>
+      <em></em>
+      <h2><a href="{% url 'home' %}">Home</a><label>/</label>Login</h2>
+    </div>
+  </div>
+  <!--login-->
+  <div class="container">
+    <div class="login">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-danger" role="alert">
+      {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+                
+      <form action="" method="POST">
+       {% csrf_token %}
+      
+        <div class="col-md-6 login-do">
+            <span style="
+          color : red ;
+          font-size : 10px;
+          margin : 0;
+          padding : 0 ;
+          "> {{ form.errors }} </span>
+            {{ form.username.label }}
+          <div class="login-mail">
+               {{ form.username }}
+            <i class="glyphicon glyphicon-pencil"></i>
+          </div>
+            {{ form.password.label }}
+          <div class="login-mail">
+            {{ form.password }}
+            <i class="glyphicon glyphicon-lock"></i>
+          </div>
+          <label class="hvr-skew-backward">
+            <input type="submit" value="login">
+          </label>
+        </div>
+        <div class="col-md-6 login-right">
+          <h3>Create An Account</h3>
+          <a href="{% url 'sign_up' %}" class=" hvr-skew-backward">Register</a>
+        </div>
+        <div class="clearfix"> </div>
+      </form>
+    </div>
+  </div>
+  <!--//login-->
+  <!--brand-->
+  <div class="container">
+    <div class="brand">
+      
+        <div class="clearfix"></div>
+      </div>
+    </div>
+    <!--//brand-->
+    <!--//content-->
+    <!--//footer-->
+   {% endblock %}

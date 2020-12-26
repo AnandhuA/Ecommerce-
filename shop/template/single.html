@@ -1,0 +1,172 @@
+{% extends 'main.html' %}
+
+{% block content %}
+{% load static %}
+{% load cart %}
+
+<div>
+  <div class="container">
+    <h1>Single</h1>
+    <em></em>
+    <h2><a href="{% url 'home' %}">Home</a><label>/</label>Single</h2>
+  </div>
+</div>
+<div class="single">
+  <div class="container">
+    <div class="col-md-9">
+      <div class="col-md-5 grid">
+        <div class="flexslider">
+          <ul class="slides">
+            <li data-thumb="{{ product.image.url }}">
+              <div class="thumb-image">
+                <img src="{{  product.image.url }}" data-imagezoom="true" class="img-responsive">
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-7 single-top-in">
+        <div class="span_2_of_a1 simpleCart_shelfItem">
+          <hr>
+          <h3>{{ product.name }}</h3>
+          <div class="price_single">
+            <span>₹.{{ product.price }}</span>
+            <a href="#">click for offer</a>
+            <div class="clearfix"></div>
+          </div>
+          <h4 class="quick">Description:</h4>
+          <p class="quick_desc">
+            {{ product.description }}
+          </p>
+          <div class="wish-list">
+            <ul>
+              <li class="wish"><a href="#"><span class="glyphicon glyphicon-check" aria-hidden="true"></span>Add to Wishlist</a></li>
+              <li class="compare"><a href="#"><span class="glyphicon glyphicon-resize-horizontal" aria-hidden="true"></span>Add to Compare</a></li>
+            </ul>
+          </div>
+          {% if user.is_authenticated %}
+          <input type="button" style="float : left;" 
+          class="add-to iteam_add hvr-skew-backward" 
+          data-toggle="modal" 
+          data-target="#check_out_form"
+          value= "Buy now" >
+          
+         
+        </div>
+        {% endif %}
+        <!--quantity-->
+
+        <!--quantity-->
+
+        {% if product|in_cart:request.session.cart %}
+
+
+
+
+        <form method="POST">
+          {% csrf_token %}
+          <input hidden type="text"
+          value="{{product.id}}"
+          name='remove'>
+          <input type="submit"
+          class="add-to item_add hvr-skew-backward"
+          value="Remove">
+        </form>
+
+        {% else %}
+
+
+        <form method="POST">
+          {% csrf_token %}
+          <input hidden type="text"
+          value="{{product.id}}"
+          name='product'>
+          <input type="submit"
+          class="add-to item_add hvr-skew-backward"
+          value="Add to cart">
+      </form>
+
+        </div>
+      {% endif %}
+
+      <div class="clearfix">
+      </div>
+    </div>
+  </div>
+  <div class="clearfix">
+  </div>
+
+<!-- form -->
+
+<div class="modal fade" id="check_out_form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Check out form</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h3>Hi, {{user.first_name}} </h3>
+        
+      <hr>
+   
+        <form action="{% url 'buynow' product.id %}" method="POST">
+                {% csrf_token %}
+    
+            <div class="form-group">
+    <label>Email address</label>
+    <input type="email" required="" name="email" class="form-control" value="{{user.email}}" aria-describedby="emailHelp" placeholder="Enter email">
+  </div>
+  
+  <div class="form-group">
+    <label>Phone number</label>
+    <input type="tel" class="form-control" name="phone" required="" placeholder="Enter valid phone number">
+  </div>
+          
+  <div class="form-group">
+    <label>Address</label>
+    <input type="text" class="form-control" name="address" required="" placeholder="Enter your address">
+  </div>
+ 
+    <div class="form-group">
+    <label>Place</label>
+    <input type="text" class="form-control" name="place" required=""  placeholder="">
+  </div>
+    <div class="form-group">
+    <label>City</label>
+    <input type="text" class="form-control" name="city" required="" placeholder="">
+  </div>
+  
+ 
+  <div class="form-check ">
+  <input type="submit" name="buynow" class="hvr-skew-backward" value="Submit">
+ </div>
+</form>
+</div>
+  
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- form end -->
+
+
+
+  <!--//menu-->
+  <!---->
+</div>
+<div class="clearfix">
+</div>
+
+<!--brand-->
+<div class="brand">
+</div>
+<!--//brand-->
+
+<!--//content-->
+{% endblock %}

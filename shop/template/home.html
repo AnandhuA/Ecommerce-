@@ -1,0 +1,95 @@
+{% extends 'main.html' %}
+{% block content %}
+{% load static %}
+{% load cart %}
+<!--block-->
+<div class="clearfix"></div>
+
+<!--banner-->
+<div>
+  <div class="container">
+    <section>
+      <h1 class="rw-sentence">
+        <span>Fashion &amp; Beauty</span>
+        <div class="rw-words rw-words-1">
+          <span>Beautiful Designs</span>
+          <span>Sed ut perspiciatis</span>
+          <span> Totam rem aperiam</span>
+          <span>Nemo enim ipsam</span>
+          <span>Temporibus autem</span>
+          <span>intelligent systems</span>
+        </div>
+      </h1>
+    </section>
+  </div>
+</div>
+<!--content-->
+<div class="content">
+  <div class="container">
+  </div>
+  <!--products-->
+  <div class="content-mid">
+    <h3>Trending Items</h3>
+    <label class="line"></label>
+    <!--product card loop start-->
+    {% for product in product %}
+    <div class="mid-popular">
+      <div class="col-md-3 item-grid simpleCart_shelfItem">
+        <div class=" mid-pop">
+          <div class="pro-img">
+            <img src="{{ product.image.url }}" style="height: 10em;" class="img-responsive " alt="">
+            <div class="zoom-icon ">
+              <a class="picture" href="{{ product.image.url }}" rel="title" class="b-link-stripe b-animate-go  thickbox"><i class="glyphicon glyphicon-search icon "></i></a>
+              <a href="{% url 'single' product.id %}"><i class="glyphicon glyphicon-menu-right icon"></i></a>
+            </div>
+          </div>
+          <div class="mid-1">
+            <div class="women">
+              <div class="women-top">
+                <h6><a href="{% url 'single' product.id %}">{{ product.name }}</a></h6>
+              </div>
+              <div class="img item_add">
+                <div class="clearfix"></div>
+              </div>
+              <div class="mid-2">
+                <p>
+                  <h4 class="item_price">₹.{{ product.price }}</h4>
+                  </p>
+                {% if product|in_cart:request.session.cart %}
+                <form method="POST">
+                  {% csrf_token %}
+                  <input hidden type="text" value="{{product.id}}" name='remove'>
+                  <input type="submit" class="add-to item_add hvr-skew-backward" value="Remove">
+                </form>
+                {% else %}
+                <form method="POST">
+                  {% csrf_token %}
+                  <input hidden type="text" value="{{product.id}}" name='product'>
+                  <input type="submit" class="add-to item_add hvr-skew-backward" value="Add to cart">
+              </form>
+              </div>
+              {% endif %}
+              <div class="block">
+                <div class="starbox small ghosting">
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--product card loop  end-->
+    {% endfor %}
+  </div>
+  <!--//products-->
+  <!--brand-->
+  <div class="brand">
+    <div class="clearfix"></div>
+  </div>
+  <!--//brand-->
+</div>
+
+<!--//content-->
+<!-- block -->
+{% endblock %}

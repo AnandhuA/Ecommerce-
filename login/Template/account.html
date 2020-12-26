@@ -1,0 +1,14 @@
+ {% extends 'main.html' %}
+
+{% block content %}
+{% load static %}
+
+
+<h2>user-name: {{user.username}} </h2>
+<hr>
+<h3>Name: {{user.first_name}}{{user.last_name}} </h3>
+<hr>
+<h4>Email-id: {{user.email}} </h4>
+<hr>
+
+  {% endblock %}

@@ -1,0 +1,124 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<!--banner-->
+
+<div>
+  <div class="container">
+    <h1>Create An Account</h1>
+    <em></em>
+    <h2><a href="{% url 'home' %}">Home</a><label>/</label>Register</h2>
+  </div>
+</div>
+<!--login-->
+<div class="container">
+  {% if error %}
+  <div class="alert alert-danger" role="alert">
+    {{ error }}
+  </div>
+  {% endif %}
+  <div class="login">
+    <form action="" method="POST">
+      {% csrf_token %}
+      <div class="col-md-6 login-do">
+
+        {{ form.username.label }}
+        <span style="
+          color : red ;
+          font-size : 10px;
+          margin : 0;
+          padding : 0 ;
+          ">  {{ form.username.errors }}</span>
+        <div class="login-mail">
+          {{ form.username }}
+          <i class="glyphicon glyphicon-pencil"></i>
+        </div>
+
+        {{ form.first_name.label }}
+        <span style="
+          color : red ;
+          font-size : 10px;
+          margin : 0;
+          padding : 0 ;
+          ">{{ form.first_name.errors }}</span>
+        <div class="login-mail">
+          {{ form.first_name }}
+          <i class="glyphicon glyphicon-user"></i>
+        </div>
+
+        {{ form.last_name.label }}
+        <span style="
+          color : red ;
+          font-size : 10px;
+          margin : 0;
+          padding : 0 ;
+          "> {{ form.last_name.errors }} </span>
+        <div class="login-mail">
+          {{ form.last_name }}
+          <i class="glyphicon glyphicon-user"></i>
+        </div>
+
+        {{ form.email.label }}
+        <span style="
+          color : red ;
+          font-size : 10px;
+          margin : 0;
+          padding : 0 ;
+          "> {{ form.email.errors }} </span>
+        <div class="login-mail">
+          {{ form.email }}
+          <i class="glyphicon glyphicon-envelope"></i>
+        </div>
+
+        {{ form.password1.label }}
+        <span style="
+          color : red ;
+          font-size : 10px;
+          margin : 0;
+          padding : 0 ;
+          "> {{ form.password1.errors }} </span>
+        <div class="login-mail">
+          {{ form.password1 }}
+          <i class="glyphicon glyphicon-lock"></i>
+        </div>
+
+        {{ form.password2.label }}
+        <span style="
+          color : red ;
+          font-size : 10px;
+          margin : 0;
+          padding : 0 ;
+          ">{{ form.password2.errors }} </span>
+        <div class="login-mail">
+          {{ form.password2 }}
+          <i class="glyphicon glyphicon-lock"></i>
+        </div>
+
+        <label class="hvr-skew-backward">
+          <input type="submit" value="Signup">
+        </label>
+      </div>
+      <div class="col-md-6 login-right">
+        <h3>Already Have An Account</h3>
+        <h7>Login here</h7>
+        <a href="{% url 'login' %}" class="hvr-skew-backward">Login</a>
+
+
+      </div>
+      <div class="clearfix">
+      </div>
+    </form>
+  </div>
+</div>
+<!--//login-->
+<!--brand-->
+<div class="container">
+  <div class="brand">
+    <div class="clearfix"></div>
+  </div>
+</div>
+<!--//brand-->
+<!--//content-->
+<!--//footer-->
+{% endblock %}

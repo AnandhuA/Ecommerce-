@@ -1,0 +1,114 @@
+{% extends 'main.html' %}
+
+{% block content %}
+{% load static %}
+{% load cart %}
+<!---  block -->
+<div class="clearfix"></div>
+
+<div>
+  <!--banner-->
+
+</div>
+<!--login-->
+
+<div class="check-out">
+  <div class="container">
+ <h4>Hello,{{ user.first_name }}</h4>
+ <hr>
+ <h2 style="color : green;">Your order sucessfully placed</h2>
+
+ <hr>
+ 
+ <p>
+   {{ user.first_name }}, <br>
+   {{ address }} <br>
+   {{ place }},
+   {{ city }} <br>
+  Phone No. {{ phone }} <br>
+  Email id. {{ email }} 
+ </p>
+ 
+   
+   <div style="padding-top: 1em;">
+  <div
+ style="border-style: inset;
+ border-radius: 15px;
+ padding : 1em;">
+ <h5>payment type</h5>
+ <hr>
+<label>Pay on delivery</label>
+  </div>
+  </div>
+  {% if product.id %}
+  <div style="padding-top:1em;">
+
+      <tr class="cart-header">
+            <td class="ring-in"><a href="#"
+            class="at-in"><img src="{{ product.image.url }}"
+            class="img-responsive" alt=""></a>
+              <div class="sed">
+                <h5><a href="{% url 'single' product.id %}">{{ product.name }}</a></h5>
+                <h4>₹.{{ product.price }}</h4>
+              </div>
+              <div class="clearfix">
+              </div>
+            </td>
+            <hr>
+  </div>
+  <div>
+    <h4>Payableyable amount = {{ product.price }}</h4>
+    </div>
+    {% else %}
+    
+              {% for product in product %}
+                <div style="padding-top:1em;">
+
+      <tr class="cart-header">
+            <td class="ring-in"><a href="#"
+            class="at-in"><img src="{{ product.image.url }}"
+            class="img-responsive" style="width : 5em; height : 5em;" alt=""></a>
+              <div class="sed">
+                <h5><a href="">{{ product.name }}</a></h5>
+                <h4>₹.{{ product.price }}</h4>
+                <h2>{{product.id}}</h2>
+              </div>
+              <div class="clearfix">
+              </div>
+            </td>
+            <hr>
+  </div>
+
+    {% endfor %}
+       
+     <h6>{{ total }}</h6>
+    {% endif %}
+    
+    <div style="padding-top : 2em;">
+ <h2 style="color : green;">Your order sucessfully placed</h2>
+
+ 
+   <a href="{% url 'home' %}" class="hvr-skew-backward">
+     Continue shopping
+   </a>
+
+  </div>
+           
+    
+  </div>
+ </div>
+
+
+<!--//login-->
+<!--brand-->
+<div class="container">
+  <div class="brand">
+    <div class="clearfix"></div>
+  </div>
+</div>
+<!--//brand-->
+<!--//content-->
+
+
+<!-- block -->
+{% endblock %}
